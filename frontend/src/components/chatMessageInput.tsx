@@ -1,13 +1,14 @@
 import { useState } from "react"
 import Icon from "@mui/material/Icon"
 
-export default function ChatMessageInput() {
+export default function ChatMessageInput(props: { onSendMessage: (message: string) => void }) {
 	const [message, setMessage] = useState("")
 
 	const sendMessage = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
 		if (message && message.trim().length > 0) {
-			console.log(message)
+			props.onSendMessage(message)
+			setMessage("")
 		}
 	}
 
