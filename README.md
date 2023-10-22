@@ -1,6 +1,6 @@
 # Chat-SD
 
-Chat desenvolvido utilizando React, Tailwind CSS, Socket.IO, Python e Flask, para posteriormente ser utilizado em um jogo de truco em web.
+Chat desenvolvido utilizando React, Tailwind CSS, Socket.IO, Python e Flask, para posteriormente ser utilizado em um jogo de truco web.
 
 ## Como usar
 
