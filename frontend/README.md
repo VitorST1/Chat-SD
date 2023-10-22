@@ -15,5 +15,5 @@
 
 Após certificar-se que os requisitos foram cumpridos, execute na pasta do projeto os seguintes comandos:
 
-- `npm install`
+- `npm install` (Rodar apenas uma vez, é usado para instalar as dependências)
 - `npm run dev`
