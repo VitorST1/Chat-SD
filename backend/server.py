@@ -24,7 +24,7 @@ def handle_message(data):
     messageCount += 1
     data['id'] = messageCount
 
-    # by including include_self, the message wont be sent to the client that sent the message
+    # by including include_self=False, the message wont be sent to the client that sent the message
     socketio.emit('new_message', data)
 
 
