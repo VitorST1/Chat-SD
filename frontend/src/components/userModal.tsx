@@ -76,6 +76,7 @@ const UserModal = React.forwardRef<
 											placeholder="Nome de usuário"
 											value={name}
 											onChange={handleNameChange}
+											autoFocus
 										/>
 									</div>
 									<div>
