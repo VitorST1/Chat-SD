@@ -7,9 +7,11 @@ import { socket } from "../socket"
 
 export default function Chat() {
 	const [user, setUser] = useState<User>({ id: "0", name: "" })
+	const userRef = useRef<User>(user)
 	const [socketId, setSocketId] = useState<string>("")
 	const [messages, setMessages] = useState<Message[]>([])
 	const dialog = useRef<HTMLDialogElement>(null)
+	let messagesDiv = document.querySelector("#messagesDiv")
 
 	const handleUserChange = (name: string) => {
 		setUser({
@@ -27,6 +29,22 @@ export default function Chat() {
 			userName: user.name,
 		})
 	}
+
+	/*
+		updates the reference of the user everytime the user changes
+		it's necessary since the useEffect hook keeps the initial value of the states
+	*/
+	useEffect(() => {
+		userRef.current = user
+	}, [user])
+
+	useEffect(() => {
+		if (user.id === "0") {
+			if (dialog.current) {
+				dialog.current?.showModal()
+			}
+		}
+	})
 
 	useEffect(() => {
 		console.log("useEffect called")
@@ -47,6 +65,14 @@ export default function Chat() {
 		socket.on("new_message", (message: Message) => {
 			console.log("new_message", message)
 			setMessages((prevMessages) => [...prevMessages, message])
+
+			if (!messagesDiv) {
+				messagesDiv = document.querySelector("#messagesDiv")
+			}
+
+			if (message.userId === userRef.current.id && messagesDiv) {
+				messagesDiv.scroll({ top: messagesDiv.scrollHeight, behavior: "smooth" })
+			}
 		})
 
 		// Cleanup function to remove the event listeners when the component unmounts
@@ -58,17 +84,9 @@ export default function Chat() {
 		}
 	}, [])
 
-	useEffect(() => {
-		if (user.id === "0") {
-			if (dialog.current) {
-				dialog.current?.showModal()
-			}
-		}
-	})
-
 	return (
 		<>
-			<UserModal ref={dialog} onUserChange={handleUserChange} />
+			<UserModal ref={dialog} onUserChange={handleUserChange} socket={socket} />
 			<div className="flex flex-col min-h-screen max-h-screen">
 				<ChatMessages messages={messages} user={user} />
 				<ChatMessageInput onSendMessage={handleSendMessage} />

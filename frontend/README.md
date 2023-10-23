@@ -13,7 +13,7 @@
 
 ## Como rodar
 
-Após certificar-se que os requisitos foram cumpridos, execute na pasta do projeto os seguintes comandos:
+Após certificar-se que os requisitos foram cumpridos, execute na pasta do projeto (frontend) os seguintes comandos:
 
 - `npm install` (Rodar apenas uma vez, é usado para instalar as dependências)
 - `npm run dev`

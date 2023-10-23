@@ -3,7 +3,7 @@
 ## Requisitos
 
 - Python 3.11
-- Flask (`pip install Flask`)
+- Flask (`pip install flask`)
 - Flask-SocketIO (`pip install flask-socketio`)
 
 ## Recomendações
@@ -12,4 +12,4 @@
 
 ## Como rodar
 
-Após certificar-se que os requisitos foram cumpridos, execute na pasta do projeto: `python server.py`
+Após certificar-se que os requisitos foram cumpridos, execute na pasta do projeto (backend): `python server.py`
