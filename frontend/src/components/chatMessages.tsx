@@ -12,7 +12,7 @@ const ChatMessages = React.forwardRef<HTMLDivElement, ChatMessagesProps>((props,
 		<>
 			<div
 				ref={ref}
-				className="flex flex-col flex-grow bg-slate-200 p-3 overflow-y-auto overflow-x-hidden break-all"
+				className="flex flex-col flex-grow bg-slate-200 p-3 overflow-y-auto overflow-x-hidden break-all scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-50"
 			>
 				{props.messages?.map((message) => (
 					<ChatMessage key={message.id} message={message} user={props.user} />
