@@ -11,7 +11,7 @@ export default function Chat() {
 	const [socketId, setSocketId] = useState<string>("")
 	const [messages, setMessages] = useState<Message[]>([])
 	const dialog = useRef<HTMLDialogElement>(null)
-	let messagesDiv = document.querySelector("#messagesDiv")
+	const messagesDivRef = useRef<HTMLDivElement>(null)
 
 	const handleUserChange = (name: string) => {
 		setUser({
@@ -66,12 +66,13 @@ export default function Chat() {
 			console.log("new_message", message)
 			setMessages((prevMessages) => [...prevMessages, message])
 
-			if (!messagesDiv) {
-				messagesDiv = document.querySelector("#messagesDiv")
-			}
-
-			if (message.userId === userRef.current.id && messagesDiv) {
-				messagesDiv.scroll({ top: messagesDiv.scrollHeight, behavior: "smooth" })
+			if (message.userId === userRef.current.id) {
+				setTimeout(() => {
+					messagesDivRef.current?.scroll({
+						top: messagesDivRef.current.scrollHeight,
+						behavior: "smooth",
+					})
+				}, 0)
 			}
 		})
 
@@ -88,7 +89,7 @@ export default function Chat() {
 		<>
 			<UserModal ref={dialog} onUserChange={handleUserChange} socket={socket} />
 			<div className="flex flex-col min-h-screen max-h-screen">
-				<ChatMessages messages={messages} user={user} />
+				<ChatMessages messages={messages} user={user} ref={messagesDivRef} />
 				<ChatMessageInput onSendMessage={handleSendMessage} />
 			</div>
 		</>
